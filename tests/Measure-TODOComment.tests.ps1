@@ -24,8 +24,9 @@ Describe 'Measure-TODOComment' {
         $fakeScript = @"
 Write-Host 'Hello, World!' # $_
 "@
-        $ast = [System.Management.Automation.Language.Parser]::ParseInput($fakeScript, [ref]$null, [ref]$null)
-        $result = Measure-TODOComment -ScriptBlockAst $ast
+        $tokens = $null
+        $ast = [System.Management.Automation.Language.Parser]::ParseInput($fakeScript, [ref]$tokens, [ref]$null)
+        $result = $tokens | ForEach-Object { Measure-TODOComment -Token $_ }
         $result.Count | Should -BeExactly 1
         $result[0].Message | Should -Be 'TODO comment found. Please consider removing it or tracking with issue.'
     }
@@ -41,8 +42,9 @@ Write-Host 'Hello, World!' # $_
 # $($_) We should write Hello, World! more often!
 Write-Host 'Hello, World!'
 "@
-        $ast = [System.Management.Automation.Language.Parser]::ParseInput($fakeScript, [ref]$null, [ref]$null)
-        $result = Measure-TODOComment -ScriptBlockAst $ast
+        $tokens = $null
+        $ast = [System.Management.Automation.Language.Parser]::ParseInput($fakeScript, [ref]$tokens, [ref]$null)
+        $result = $tokens | ForEach-Object { Measure-TODOComment -Token $_ }
         $result.Count | Should -BeExactly 1
         $result[0].Message | Should -Be 'TODO comment found. Please consider removing it or tracking with issue.'
     }
