@@ -1,0 +1,13 @@
+name: Publish docs via GitHub Pages
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+permissions:
+  checks: write
+  pull-requests: write
+jobs:
+  pages:
+    uses: HeyItsGilbert/.github/.github/workflows/Pages.yaml@main
+    secrets: inherit
