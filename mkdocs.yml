@@ -1,5 +1,4 @@
 site_name: "Good Enough Rules: ScriptAnalyzer Rules Module"
-site_name: https://heyitsgilbert.github.io/GoodEnoughRules
 repo_url: https://github.com/HeyItsGilbert/GoodEnoughRules
 theme: readthedocs
 nav:
