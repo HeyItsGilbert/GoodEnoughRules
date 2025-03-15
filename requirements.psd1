@@ -1,3 +1,4 @@
+# spell-checker:ignore psake
 @{
     PSDepend = @{
         Version = '0.3.8'
@@ -21,6 +22,6 @@
         Version = '0.6.1'
     }
     'PSScriptAnalyzer' = @{
-        Version = '1.19.1'
+        Version = '1.23.0'
     }
 }
