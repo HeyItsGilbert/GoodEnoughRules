@@ -50,7 +50,6 @@ function Measure-TODOComment {
         foreach ($i in $Token.Extent.Text) {
             try {
                 $matches = $regEx.Matches($i)
-            }
             } catch {
                 $PSCmdlet.ThrowTerminatingError($PSItem)
             }
