@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 permissions:
   checks: write
-  pull-requests: write
+  contents: write
 jobs:
   pages:
     uses: HeyItsGilbert/.github/.github/workflows/Pages.yaml@main
