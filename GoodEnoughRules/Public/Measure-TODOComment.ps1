@@ -7,7 +7,7 @@ function Measure-TODOComment {
     .EXAMPLE
     Measure-TODOComment -ScriptBlockAst $ScriptBlockAst
 
-    This would check if the given ScriptBlockAst contains any TODO comments.
+    This will check if the given ScriptBlockAst contains any TODO comments.
     .PARAMETER Token
     The token to check for TODO comments.
     .INPUTS
@@ -18,7 +18,7 @@ function Measure-TODOComment {
     None
     #>
     [CmdletBinding()]
-    [OutputType([Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord[]])]
+    [OutputType([Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord])]
     Param
     (
         [Parameter(Mandatory = $true)]
@@ -43,33 +43,29 @@ function Measure-TODOComment {
     }
 
     Process {
-        $results = @()
-        try {
-            if (-not $Token.Type -ne 'Comment') {
-                return
-            }
-            #region Finds ASTs that match the predicates.
-            $startingLine = $Token.Extent.StartLineNumber
-            foreach ($i in $Token.Extent.Text) {
-                $matches = $regEx.Matches($i)
-                if ($matches.Count -ne 0) {
-                    $matches | ForEach-Object {
-                        $result = [Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord]@{
-                            'Message' = "TODO comment found. Please consider removing it or tracking with issue."
-                            'Extent' = $Token.Extent
-                            'RuleName' = $PSCmdlet.MyInvocation.InvocationName
-                            'Severity' = 'Information'
-                        }
-                        $results += $result
-                    }
-                }
-                # Increment the line number
-                $startingLine++
-            }
-            return $results
-            #endregion
-        } catch {
-            $PSCmdlet.ThrowTerminatingError($PSItem)
+        if (-not $Token.Type -ne 'Comment') {
+            return
         }
+        #region Finds ASTs that match the predicates.
+        foreach ($i in $Token.Extent.Text) {
+            try {
+                $matches = $regEx.Matches($i)
+            }
+            } catch {
+                $PSCmdlet.ThrowTerminatingError($PSItem)
+            }
+            if ($matches.Count -eq 0) {
+                continue
+            }
+            $matches | ForEach-Object {
+                [Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord]@{
+                    'Message' = "TODO comment found. Please consider removing it or tracking with issue."
+                    'Extent' = $Token.Extent
+                    'RuleName' = $PSCmdlet.MyInvocation.InvocationName
+                    'Severity' = 'Information'
+                }
+            }
+        }
+        #endregion
     }
 }
