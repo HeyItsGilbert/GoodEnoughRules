@@ -8,7 +8,7 @@ schema: 2.0.0
 # Measure-TODOComment
 
 ## SYNOPSIS
-Uses #Requires -RunAsAdministrator instead of your own methods.
+Rule to detect if TODO style comments are present.
 
 ## SYNTAX
 
@@ -18,26 +18,21 @@ Measure-TODOComment [-ScriptBlockAst] <ScriptBlockAst> [-ProgressAction <ActionP
 ```
 
 ## DESCRIPTION
-The #Requires statement prevents a script from running unless the Windows PowerShell
-version, modules, snap-ins, and module and snap-in version prerequisites are met.
-From Windows PowerShell 4.0, the #Requires statement let script developers require that
-sessions be run with elevated user rights (run as Administrator).
-Script developers does
-not need to write their own methods any more.
-To fix a violation of this rule, please
-consider using #Requires -RunAsAdministrator instead of your own methods.
+This rule detects if TODO style comments are present in the given ScriptBlockAst.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Measure-RequiresRunAsAdministrator -ScriptBlockAst $ScriptBlockAst
+Measure-TODOComment -ScriptBlockAst $ScriptBlockAst
 ```
+
+This would check if the given ScriptBlockAst contains any TODO comments.
 
 ## PARAMETERS
 
 ### -ScriptBlockAst
-{{ Fill ScriptBlockAst Description }}
+The ScriptBlockAst to check for TODO comments.
 
 ```yaml
 Type: ScriptBlockAst
