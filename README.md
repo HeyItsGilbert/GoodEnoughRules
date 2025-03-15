@@ -4,18 +4,18 @@ A set of PSScriptAnalyzer rules that help make it Good Enough!
 
 ## Badges
 
-[![PowerShell Gallery][psgallery-downloads-badge]
-![PowerShell Gallery Version][psgallery-version-badge]
-![GitHub Workflow Status][build-badge]
-![PowerShell Gallery][platform-badge]][psgallery]
+| Downloads | Version | Publish Status | Supported Platforms |
+|---|---|---|---|
+| ![PowerShell Gallery][psgallery-downloads-badge] | ![PowerShell Gallery Version][psgallery-version-badge] | ![GitHub Workflow Status][build-badge] | ![PowerShell Gallery][platform-badge] |
 
 ## Overview
 
-These are rules that (Good Enough) Gilbert, slapped together after seeing
+These are rules that _"Good Enough"_ Gilbert, slapped together after seeing
 someone or something that wanted it. These may not be appropriate for the
 standard set of rules so keep that in mind.
 
-You will probably want to enable individual rules vs all of them.
+You will probably want to enable individual rules vs all of them at once. I
+suggest taking a look at the documents to see what each rule does.
 
 ## Installation
 
@@ -25,9 +25,13 @@ Install from the [PowerShell Gallery][psgallery]:
 Install-PSResource GoodEnoughRules
 ```
 
+## Documentation
+
+The docs are automatically generated from the rule comment based help. You can see the docs at [HeyItsGilbert.GitHub.io/GoodEnoughRules](https://heyitsgilbert.github.io/GoodEnoughRules)
+
 ## Walk Through
 
-> [!TIP] Tip
+> [!TIP]
 > Use a "proxy module" to load all your different custom rules and check that into your repository. This helps you avoid having to hardcode to a specific module path.
 
 1. Install the module.
@@ -63,9 +67,16 @@ Install-PSResource GoodEnoughRules
 If you're interested in learning more about the "Proxy Module" concept, see
 [Sharing Your Custom PSScriptAnalyzer Rules][sharing-custom-psscriptanalyzer-rules]
 
+## Using PSDepend
+
+This module depends on `PSScriptAnalyzer` which means that it will install it
+if's not available. If you have different required versions in your PSDepend
+configuration that can cause conflict. I will try to avoid that by only
+requiring a minimum version.
+
 [psgallery-downloads-badge]: https://img.shields.io/powershellgallery/dt/goodenoughrules
 [psgallery-version-badge]: https://img.shields.io/powershellgallery/v/GoodEnoughRules
-[build-badge]: https://img.shields.io/github/actions/workflow/status/HeyItsGilbert/GoodEnoughRules/.github/workflows/CI.yaml?branch=main
+[build-badge]: https://img.shields.io/github/actions/workflow/status/HeyItsGilbert/GoodEnoughRules/.github/workflows/publish.yaml?branch=main
 [platform-badge]: https://img.shields.io/powershellgallery/p/GoodEnoughRules
 [psgallery]: https://www.powershellgallery.com/packages/GoodEnoughRules
 [sharing-custom-psscriptanalyzer-rules]: https://gilbertsanchez.com/posts/sharing-custom-psscriptanalyzer-rules/
