@@ -21,4 +21,14 @@ ConvertFrom-SecureString -SecureString $secureString
         $result.Count | Should -BeExactly 1
         $result[0].Message | Should -Be 'ConvertFrom-SecureString should be used with a Key.'
     }
+
+    It 'does not detect correct usage' {
+        $fakeScript = @'
+$secureString = 'Hello, World!' | ConvertTo-SecureString -AsPlainText -Force
+ConvertFrom-SecureString -SecureString $secureString -Key (1..16)
+'@
+        $ast = [System.Management.Automation.Language.Parser]::ParseInput($fakeScript, [ref]$null, [ref]$null)
+        $result = Measure-TODOComment -ScriptBlockAst $ast
+        $results | Should -BeNullOrEmpty
+    }
 }
