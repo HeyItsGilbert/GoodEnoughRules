@@ -5,13 +5,13 @@ function Measure-TODOComment {
     .DESCRIPTION
     This rule detects if TODO style comments are present in the given ScriptBlockAst.
     .EXAMPLE
-    Measure-TODOComment -ScriptBlockAst $ScriptBlockAst
+    Measure-TODOComment -Token $Token
 
-    This will check if the given ScriptBlockAst contains any TODO comments.
+    This will check if the given Token contains any TODO comments.
     .PARAMETER Token
     The token to check for TODO comments.
     .INPUTS
-    [System.Management.Automation.Language.ScriptBlockAst]
+    [System.Management.Automation.Language.Token]
     .OUTPUTS
     [Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord[]]
     .NOTES
