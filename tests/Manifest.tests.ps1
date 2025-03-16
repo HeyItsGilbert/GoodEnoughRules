@@ -1,3 +1,4 @@
+# spell-checker:ignore oneline
 BeforeAll {
     
     # NEW: Pre-Specify RegEx Matching Patterns
@@ -76,7 +77,9 @@ Describe 'Git tagging' -Skip {
         # Ensure to only pull in a single git executable (in case multiple git's are found on path).
         if ($git = (Get-Command git -CommandType Application -ErrorAction SilentlyContinue)[0]) {
             $thisCommit = & $git log --decorate --oneline HEAD~1..HEAD
-            if ($thisCommit -match $gitTagMatchRegEx) { $gitTagVersion = $matches[1] }
+            if ($thisCommit -match $gitTagMatchRegEx) {
+                $gitTagVersion = $matches[1] 
+            }
         }
     }
 

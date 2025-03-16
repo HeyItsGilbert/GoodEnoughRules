@@ -33,3 +33,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   comment exists in your code.
 
 [#3]: https://github.com/HeyItsGilbert/GoodEnoughRules/pull/3
+
+<!-- spell-checker:ignore DPAPI -->

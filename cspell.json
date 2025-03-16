@@ -1,0 +1,29 @@
+// cSpell Settings
+{
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    // Version of the setting file.  Always 0.2
+    "version": "0.2",
+    // language - current active spelling language
+    "language": "en",
+    "dictionaries": ["powershell"],
+    // words - list of words to be always considered correct
+    "words": [
+        "BHPS",
+        "maml",
+        "psake",
+        "visualstudio"
+    ],
+    // flagWords - list of words to be always considered incorrect
+    // This is useful for offensive words and common spelling errors.
+    // For example "hte" should be "the"
+    "flagWords": [
+        "hte"
+    ],
+    "ignorePaths": [
+        "cspell.json",
+        "docs/requirements.txt",
+        "docs/en-US/**",
+        "Output/**",
+        "tests/out/**"
+    ]
+}

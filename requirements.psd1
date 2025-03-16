@@ -24,4 +24,9 @@
     'PSScriptAnalyzer' = @{
         Version = '1.23.0'
     }
+    'cspell' = @{
+        DependencyType = 'Npm'
+        Version = '8.17.5'
+        Target = 'Global'
+    }
 }
