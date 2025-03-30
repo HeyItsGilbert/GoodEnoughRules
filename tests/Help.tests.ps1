@@ -1,11 +1,12 @@
 # Taken with love from @juneb_get_help (https://raw.githubusercontent.com/juneb/PesterTDD/master/Module.Help.Tests.ps1)
+# spell-checker:ignore juneb
 
 BeforeDiscovery {
 
     function global:FilterOutCommonParams {
         param ($Params)
         $commonParams = [System.Management.Automation.PSCmdlet]::CommonParameters +
-            [System.Management.Automation.PSCmdlet]::OptionalCommonParameters
+        [System.Management.Automation.PSCmdlet]::OptionalCommonParameters
         $params | Where-Object { $_.Name -notin $commonParams } | Sort-Object -Property Name -Unique
     }
 
@@ -84,7 +85,9 @@ Describe "Test help for <_.Name>" -ForEach $commands {
             $parameter         = $_
             $parameterName     = $parameter.Name
             $parameterHelp     = $commandHelp.parameters.parameter | Where-Object Name -eq $parameterName
-            $parameterHelpType = if ($parameterHelp.ParameterValue) { $parameterHelp.ParameterValue.Trim() }
+            $parameterHelpType = if ($parameterHelp.ParameterValue) {
+                $parameterHelp.ParameterValue.Trim() 
+            }
         }
 
         # Should be a description for every parameter
