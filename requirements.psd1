@@ -7,7 +7,7 @@
         Target = 'CurrentUser'
     }
     'Pester' = @{
-        Version = '5.4.0'
+        Version = '5.7.1'
         Parameters = @{
             SkipPublisherCheck = $true
         }
