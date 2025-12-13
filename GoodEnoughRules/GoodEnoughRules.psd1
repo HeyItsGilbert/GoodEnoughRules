@@ -52,10 +52,7 @@
 
     # Modules that must be imported into the global environment prior to importing this module
     RequiredModules = @(
-        @{
-            ModuleName = 'PSScriptAnalyzer'
-            ModuleVersion = '1.24'
-        }
+        # WARNING: Do not require PSScriptAnalyzer here to avoid circular dependency
     )
 
     # Assemblies that must be loaded prior to importing this module
