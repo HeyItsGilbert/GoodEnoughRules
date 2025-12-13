@@ -22,7 +22,7 @@
         Version = '0.6.1'
     }
     'PSScriptAnalyzer' = @{
-        Version = '1.23.0'
+        Version = '1.24.0'
     }
     'cspell' = @{
         DependencyType = 'Npm'

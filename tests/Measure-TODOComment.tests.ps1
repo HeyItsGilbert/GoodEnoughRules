@@ -1,5 +1,8 @@
 Describe 'Measure-TODOComment' {
     BeforeAll {
+        if ( -not $env:BHPSModuleManifest ) {
+            .\build.ps1 -Task Build -Verbose
+        }
         $manifest = Import-PowerShellDataFile -Path $env:BHPSModuleManifest
         $outputDir = Join-Path -Path $env:BHProjectPath -ChildPath 'Output'
         $outputModDir = Join-Path -Path $outputDir -ChildPath $env:BHProjectName
