@@ -5,31 +5,37 @@ online version:
 schema: 2.0.0
 ---
 
-# Measure-SecureStringWithKey
+# Measure-BasicWebRequestProperty
 
 ## SYNOPSIS
-Rule to detect if ConvertFrom-SecureString is used without a Key.
+Rule to detect if Invoke-WebRequest is used with UseBasicParsing and
+incompatible properties.
 
 ## SYNTAX
 
 ```
-Measure-SecureStringWithKey [-ScriptBlockAst] <ScriptBlockAst> [-ProgressAction <ActionPreference>]
+Measure-BasicWebRequestProperty [-ScriptBlockAst] <ScriptBlockAst> [-ProgressAction <ActionPreference>]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This rule detects if ConvertFrom-SecureString is used without a Key which
-means the secret is user and machine bound.
+This rule detects if Invoke-WebRequest (or its aliases) is used with the
+UseBasicParsing parameter and then attempts to access properties that are
+incompatible with UseBasicParsing.
+This includes properties like 'Forms',
+'ParsedHtml', 'Scripts', and 'AllElements'.
+This checks for both direct
+member access after the command as well as variable assignments.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Measure-SecureStringWithKey -ScriptBlockAst $ScriptBlockAst
+Measure-BasicWebRequestProperty -ScriptBlockAst $ScriptBlockAst
 ```
 
-This will check if the given ScriptBlockAst contains any
-ConvertFrom-SecureString commands without a Key parameter.
+This will check if the given ScriptBlockAst contains any Invoke-WebRequest
+commands with UseBasicParsing that access incompatible properties.
 
 ## PARAMETERS
 
@@ -73,6 +79,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### [Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord[]]
 ## NOTES
-None
 
 ## RELATED LINKS

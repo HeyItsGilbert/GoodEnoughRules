@@ -12,7 +12,7 @@
     RootModule = 'GoodEnoughRules.psm1'
 
     # Version number of this module.
-    ModuleVersion = '0.2.0'
+    ModuleVersion = '0.3.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -52,10 +52,7 @@
 
     # Modules that must be imported into the global environment prior to importing this module
     RequiredModules = @(
-        @{
-            ModuleName = 'PSScriptAnalyzer'
-            ModuleVersion = '1.23'
-        }
+        # WARNING: Do not require PSScriptAnalyzer here to avoid circular dependency
     )
 
     # Assemblies that must be loaded prior to importing this module

@@ -29,6 +29,20 @@ Install-PSResource GoodEnoughRules
 
 The docs are automatically generated from the rule comment based help. You can see the docs at [HeyItsGilbert.GitHub.io/GoodEnoughRules](https://heyitsgilbert.github.io/GoodEnoughRules)
 
+## Examples
+
+### Running a Single Rule
+
+```powershell
+# Install and import
+Install-PSResource GoodEnoughRules
+$module = Import-Module GoodEnoughRules -PassThru
+# Get the path the psm1
+$modulePath = Join-Path $module.ModuleBase $module.RootModule
+# Run against a folder
+Invoke-ScriptAnalyzer -CustomRulePath $modulePath -IncludeRule 'Measure-InvokeWebRequestWithoutBasic' -Path '.\scripts\'
+```
+
 ## Walk Through
 
 > [!TIP]
