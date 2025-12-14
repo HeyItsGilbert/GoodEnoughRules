@@ -6,7 +6,7 @@ A set of PSScriptAnalyzer rules that help make it Good Enough!
 
 | Downloads | Version | Publish Status | Supported Platforms |
 |---|---|---|---|
-| ![PowerShell Gallery][psgallery-downloads-badge] | ![PowerShell Gallery Version][psgallery-version-badge] | ![GitHub Workflow Status][build-badge] | ![PowerShell Gallery][platform-badge] |
+| [![PowerShell Gallery][psgallery-downloads-badge]][psgallery] | [![PowerShell Gallery Version][psgallery-version-badge]][psgallery] | [![GitHub Workflow Status][build-badge]](https://github.com/HeyItsGilbert/GoodEnoughRules/actions/workflows/publish.yaml) | [![PowerShell Gallery][platform-badge]][psgallery] |
 
 ## Overview
 
@@ -94,3 +94,4 @@ requiring a minimum version.
 [platform-badge]: https://img.shields.io/powershellgallery/p/GoodEnoughRules
 [psgallery]: https://www.powershellgallery.com/packages/GoodEnoughRules
 [sharing-custom-psscriptanalyzer-rules]: https://gilbertsanchez.com/posts/sharing-custom-psscriptanalyzer-rules/
+
