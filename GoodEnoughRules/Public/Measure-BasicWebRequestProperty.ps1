@@ -77,7 +77,7 @@ function Measure-BasicWebRequestProperty {
 
     process {
         # Find all member expression ASTs that match our criteria
-        [System.Management.Automation.Language.Ast[]]$memberReads = $ScriptBlockAst.FindAll($iwrMemberRead, $true)
+        [System.Management.Automation.Language.Ast[]]$memberReads = $ScriptBlockAst.FindAll($iwrMemberRead, $false)
         foreach ($memberRead in $memberReads) {
             # ParenExpression would be the whole line: (iwr -Uri ... -UseBasicParsing).Foo
             $parenExpression = $memberRead.Parent.Parent
@@ -89,7 +89,7 @@ function Measure-BasicWebRequestProperty {
             }
         }
         # Find all assignment ASTs that match our criteria
-        [System.Management.Automation.Language.Ast[]]$assignments = $ScriptBlockAst.FindAll($varAssignPredicate, $true)
+        [System.Management.Automation.Language.Ast[]]$assignments = $ScriptBlockAst.FindAll($varAssignPredicate, $false)
         # Now use that to search for var reads of the assigned variable
         foreach ($assignment in $assignments) {
             $variableName = $assignment.Left.VariablePath.UserPath
