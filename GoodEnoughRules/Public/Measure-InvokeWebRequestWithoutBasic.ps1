@@ -40,7 +40,7 @@ function Measure-InvokeWebRequestWithoutBasic {
     }
 
     process {
-        [System.Management.Automation.Language.Ast[]]$commands = $ScriptBlockAst.FindAll($predicate, $true)
+        [System.Management.Automation.Language.Ast[]]$commands = $ScriptBlockAst.FindAll($predicate, $false)
         $commands | ForEach-Object {
             Write-Verbose "Analyzing command: $($_.GetCommandName())"
             $command = $_

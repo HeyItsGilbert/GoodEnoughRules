@@ -8,14 +8,14 @@ param(
             switch ($Parameter) {
                 'Task' {
                     if ([string]::IsNullOrEmpty($WordToComplete)) {
-                        Get-PSakeScriptTasks -buildFile $psakeFile | Select-Object -ExpandProperty Name
+                        Get-PSakeScriptTasks -BuildFile $psakeFile | Select-Object -ExpandProperty Name
                     } else {
-                        Get-PSakeScriptTasks -buildFile $psakeFile |
+                        Get-PSakeScriptTasks -BuildFile $psakeFile |
                             Where-Object { $_.Name -match $WordToComplete } |
                             Select-Object -ExpandProperty Name
                     }
                 }
-                Default {
+                default {
                 }
             }
         })]
@@ -55,10 +55,11 @@ if ($Bootstrap.IsPresent) {
 # Execute psake task(s)
 $psakeFile = './psakeFile.ps1'
 if ($PSCmdlet.ParameterSetName -eq 'Help') {
-    Get-PSakeScriptTasks -buildFile $psakeFile |
+    Get-PSakeScriptTasks -BuildFile $psakeFile |
         Format-Table -Property Name, Description, Alias, DependsOn
 } else {
+    Invoke-PSDepend -Path './requirements.psd1' -Import -Force -WarningAction SilentlyContinue
     Set-BuildEnvironment -Force
-    Invoke-psake -buildFile $psakeFile -taskList $Task -NoLogo -properties $Properties -parameters $Parameters
+    Invoke-psake -buildFile $psakeFile -taskList $Task -nologo -properties $Properties -parameters $Parameters
     exit ([int](-not $psake.build_success))
 }

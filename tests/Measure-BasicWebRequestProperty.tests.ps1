@@ -1,12 +1,13 @@
-Describe 'Measure-TODOComment' {
+Describe 'Measure-BasicWebRequestProperty' {
     BeforeAll {
         if ( -not $env:BHPSModuleManifest ) {
-            .\build.ps1 -Task Build -Verbose
+            Set-BuildEnvironment -Path "$PSScriptRoot\.." -Force
         }
         $manifest = Import-PowerShellDataFile -Path $env:BHPSModuleManifest
         $outputDir = Join-Path -Path $env:BHProjectPath -ChildPath 'Output'
         $outputModDir = Join-Path -Path $outputDir -ChildPath $env:BHProjectName
         $outputModVerDir = Join-Path -Path $outputModDir -ChildPath $manifest.ModuleVersion
+        $script:outputModVerModule = Join-Path -Path $outputModVerDir -ChildPath "$($env:BHProjectName).psm1"
         $outputModVerManifest = Join-Path -Path $outputModVerDir -ChildPath "$($env:BHProjectName).psd1"
 
         # Get module commands
@@ -22,6 +23,19 @@ Describe 'Measure-TODOComment' {
             $result = Measure-BasicWebRequestProperty -ScriptBlockAst $ast
             $result.Count | Should -BeExactly 1
             $result[0].Message | Should -Be "Invoke-WebRequest cannot use the 'Forms' parameter when 'UseBasicParsing' is specified."
+        }
+
+        It 'Detects another bad method usage' {
+            $file = "$PSScriptRoot\fixtures\ExampleFunction.ps1"
+            $invokeScriptAnalyzerSplat = @{
+                Path = $file
+                IncludeRule = 'Measure-BasicWebRequestProperty'
+                CustomRulePath = $script:outputModVerModule
+            }
+            $result = Invoke-ScriptAnalyzer @invokeScriptAnalyzerSplat
+            $result.Count | Should -BeExactly 2
+            $result[0].Message | Should -Be "Invoke-WebRequest cannot use the 'Forms' parameter when 'UseBasicParsing' is specified."
+            $result[1].Message | Should -Be "Invoke-WebRequest cannot use the 'AllElements' parameter when 'UseBasicParsing' is specified."
         }
 
         It 'does not detect correct usage of Images property' {

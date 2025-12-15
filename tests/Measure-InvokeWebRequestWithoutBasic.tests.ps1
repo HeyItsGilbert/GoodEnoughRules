@@ -1,18 +1,20 @@
 Describe 'Measure-InvokeWebRequestWithoutBasic' {
     BeforeAll {
         if ( -not $env:BHPSModuleManifest ) {
-            .\build.ps1 -Task Build -Verbose
+            Set-BuildEnvironment -Path "$PSScriptRoot\.." -Force
         }
         $manifest = Import-PowerShellDataFile -Path $env:BHPSModuleManifest
         $outputDir = Join-Path -Path $env:BHProjectPath -ChildPath 'Output'
         $outputModDir = Join-Path -Path $outputDir -ChildPath $env:BHProjectName
         $outputModVerDir = Join-Path -Path $outputModDir -ChildPath $manifest.ModuleVersion
+        $script:outputModVerModule = Join-Path -Path $outputModVerDir -ChildPath "$($env:BHProjectName).psm1"
         $outputModVerManifest = Join-Path -Path $outputModVerDir -ChildPath "$($env:BHProjectName).psd1"
 
         # Get module commands
         # Remove all versions of the module from the session. Pester can't handle multiple versions.
         Get-Module $env:BHProjectName | Remove-Module -Force -ErrorAction Ignore
         Import-Module -Name $outputModVerManifest -Verbose:$false -ErrorAction Stop
+        Import-Module -Name 'PSScriptAnalyzer' -Verbose:$false -ErrorAction Inquire
     }
 
     Context 'When Invoke-WebRequest is used without UseBasicParsing' {
@@ -25,6 +27,23 @@ Invoke-WebRequest -Uri 'https://example.com'
             $result.Count | Should -BeExactly 1
             $result[0].Message | Should -Be 'Invoke-WebRequest should be used with the UseBasicParsing parameter.'
             $result[0].Severity | Should -Be 'Error'
+        }
+
+        It 'detects Invoke-WebRequest without UseBasicParsing in different formatting' {
+            $file = "$PSScriptRoot\fixtures\ExampleFunction.ps1"
+            $invokeScriptAnalyzerSplat = @{
+                Path = $file
+                IncludeRule = 'Measure-InvokeWebRequestWithoutBasic'
+                CustomRulePath = $script:outputModVerModule
+            }
+
+            $result = Invoke-ScriptAnalyzer @invokeScriptAnalyzerSplat
+            $result.Count | Should -BeExactly 2
+            $result[0].Message | Should -Be 'Invoke-WebRequest should be used with the UseBasicParsing parameter.'
+            $result[0].Severity | Should -Be 'Error'
+            $result[0].Line | Should -Be 6
+            $result[1].Message | Should -Be 'Invoke-WebRequest should be used with the UseBasicParsing parameter.'
+            $result[1].Severity | Should -Be 'Error'
         }
 
         It 'Detects iwr alias without UseBasicParsing' {

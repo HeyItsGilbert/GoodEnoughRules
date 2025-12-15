@@ -1,7 +1,7 @@
 Describe 'Measure-TODOComment' {
     BeforeAll {
         if ( -not $env:BHPSModuleManifest ) {
-            .\build.ps1 -Task Build -Verbose
+            Set-BuildEnvironment -Path "$PSScriptRoot\.." -Force
         }
         $manifest = Import-PowerShellDataFile -Path $env:BHPSModuleManifest
         $outputDir = Join-Path -Path $env:BHProjectPath -ChildPath 'Output'

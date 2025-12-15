@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.3.1] 2025-12-14
+
+### Fixed
+
+- `Measure-BasicWebRequestProperty`: AST search modified to fix duplicate errors
+  due to recursive search.
+- `Measure-InvokeWebRequestWithoutBasic`: AST search modified to fix duplicate
+  errors due to recursive search.
+
 ## [0.3.0] 2025-12-13
 
 ### Added
