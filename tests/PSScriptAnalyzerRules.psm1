@@ -1,2 +1,2 @@
-$rules = Import-Module -Name 'GoodEnoughRules' -PassThru
+$rules = Import-Module "$PSScriptRoot\..\Output\GoodEnoughRules" -PassThru
 Export-ModuleMember -Function @($rules.ExportedCommands.Keys)

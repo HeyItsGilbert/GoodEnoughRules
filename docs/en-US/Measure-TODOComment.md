@@ -13,7 +13,7 @@ Rule to detect if TODO style comments are present.
 ## SYNTAX
 
 ```
-Measure-TODOComment [-Token] <Token> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Measure-TODOComment [-Token] <Token[]> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,7 +34,7 @@ This would check if the given ScriptBlockAst contains any TODO comments.
 The token to check for TODO comments.
 
 ```yaml
-Type: Token
+Type: Token[]
 Parameter Sets: (All)
 Aliases:
 

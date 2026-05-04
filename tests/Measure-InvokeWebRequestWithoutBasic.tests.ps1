@@ -14,7 +14,6 @@ Describe 'Measure-InvokeWebRequestWithoutBasic' {
         # Remove all versions of the module from the session. Pester can't handle multiple versions.
         Get-Module $env:BHProjectName | Remove-Module -Force -ErrorAction Ignore
         Import-Module -Name $outputModVerManifest -Verbose:$false -ErrorAction Stop
-        Import-Module -Name 'PSScriptAnalyzer' -Verbose:$false -ErrorAction Inquire
     }
 
     Context 'When Invoke-WebRequest is used without UseBasicParsing' {
