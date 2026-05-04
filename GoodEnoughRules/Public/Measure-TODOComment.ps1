@@ -11,7 +11,7 @@ function Measure-TODOComment {
     .PARAMETER Token
     The token to check for TODO comments.
     .INPUTS
-    [System.Management.Automation.Language.Token]
+    [System.Management.Automation.Language.Token[]]
     .OUTPUTS
     [Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord[]]
     .NOTES
@@ -19,15 +19,15 @@ function Measure-TODOComment {
     #>
     [CmdletBinding()]
     [OutputType([Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord])]
-    Param
+    param
     (
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [System.Management.Automation.Language.Token]
+        [System.Management.Automation.Language.Token[]]
         $Token
     )
 
-    Begin {
+    begin {
         $toDoIndicators = @(
             'TODO',
             'FIXME',
@@ -42,21 +42,21 @@ function Measure-TODOComment {
         $regEx = [regex]::new($regExPattern, $regExOptions)
     }
 
-    Process {
+    process {
         if (-not $Token.Type -ne 'Comment') {
             return
         }
         #region Finds ASTs that match the predicates.
         foreach ($i in $Token.Extent.Text) {
             try {
-                $matches = $regEx.Matches($i)
+                $regexMatches = $regEx.Matches($i)
             } catch {
                 $PSCmdlet.ThrowTerminatingError($PSItem)
             }
-            if ($matches.Count -eq 0) {
+            if ($regexMatches.Count -eq 0) {
                 continue
             }
-            $matches | ForEach-Object {
+            $regexMatches | ForEach-Object {
                 [Microsoft.Windows.PowerShell.ScriptAnalyzer.Generic.DiagnosticRecord]@{
                     'Message' = "TODO comment found. Please consider removing it or tracking with issue."
                     'Extent' = $Token.Extent

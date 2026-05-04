@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0] 2026-05-04
+
+### Added
+
+- `Measure-GremlinCharacter`: New rule to detect invisible or visually
+  deceptive Unicode characters (gremlins) such as zero-width spaces,
+  bidirectional overrides, and curly quotes. 19 characters flagged with
+  per-character severity (`Error`, `Warning`, or `Information`).
+  Inspired by [vscode-gremlins](https://github.com/nhoizey/vscode-gremlins).
+- Tests for `Measure-GremlinCharacter` with per-character `-ForEach`
+  cases, a negative clean-code case, a fixture-based detection test,
+  and a suppression test using `SuppressMessageAttribute`.
+- `CLAUDE.md` with project guidance for Claude Code.
+
+### Changed
+
+- `Measure-TODOComment`: Updated `Token` parameter type to `Token[]`
+  to match how PSScriptAnalyzer invokes token-based rules; renamed
+  `$matches` to `$regexMatches` to avoid collision with the automatic
+  `$Matches` variable; normalized keyword casing to lowercase.
+- `tests/PSScriptAnalyzerRules.psm1`: Proxy module now loads explicitly
+  from the `Output\GoodEnoughRules` build directory.
+
 ## [0.3.1] 2025-12-14
 
 ### Fixed
