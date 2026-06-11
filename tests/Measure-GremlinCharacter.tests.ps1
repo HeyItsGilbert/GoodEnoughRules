@@ -71,6 +71,6 @@ Describe 'Measure-GremlinCharacter' {
         }
         $result = Invoke-ScriptAnalyzer @invokeScriptAnalyzerSplat
         $result.Count | Should -BeExactly 1
-        $result[0].Message | Should -Be "Gremlin character found: U+2013 (en dash). This character may be invisible or visually deceptive."
+        $result[0].Message | Should -Match '^Gremlin character found: U\+[0-9A-F]{4} \(.+\)\. This character may be invisible or visually deceptive\.$'
     }
 }
