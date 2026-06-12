@@ -91,6 +91,37 @@ $secureString | ConvertFrom-SecureString -Key $keyBytes
 
 **Why it matters:** Without a key, encrypted strings cannot be decrypted on different machines or by different users, limiting portability and automation scenarios.
 
+### Measure-GremlinCharacter
+
+**Severity:** Varies (Error / Warning / Information depending on the character)
+
+Detects invisible or visually deceptive Unicode characters ("gremlins") such as
+zero-width spaces, non-breaking spaces, bidirectional overrides, and curly quotes
+(`‘ ’ “ ”`). These characters are nearly impossible to spot in an editor but can
+introduce subtle bugs or security issues.
+
+```powershell
+# This will trigger the rule (curly quotes instead of straight ASCII quotes):
+Write-Host “Hello, World!”
+```
+
+**Why it matters:** Gremlin characters can silently break string comparisons,
+sneak past code review, or be used to disguise malicious code. Surfacing them at
+analysis time makes the invisible visible.
+
+> [!IMPORTANT]
+> **File encoding affects detection.** The bytes a parser sees depend on how the
+> file is decoded, and that default differs by PowerShell edition:
+>
+> - **PowerShell 7+** reads files without a byte-order mark (BOM) as **UTF-8**.
+> - **Windows PowerShell 5.1** reads BOM-less files using the system **ANSI code
+>   page** (e.g. Windows-1252).
+>
+> A multi-byte UTF-8 gremlin (for example an en dash `U+2013`, stored as
+> `E2 80 93`) is decoded correctly under PowerShell 7, but under 5.1 those bytes
+> are interpreted as separate Windows-1252 characters — so the rule may report a
+> different code point, or miss it entirely. **Save files as UTF-8 with a BOM** to
+> get consistent results across both editions.
 
 ## Examples
 
