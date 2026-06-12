@@ -1,4 +1,4 @@
-function Test-Suppressed {
+﻿function Test-Suppressed {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
         'GoodEnoughRules\Measure-GremlinCharacter',
         '',
