@@ -40,7 +40,10 @@ function Measure-GremlinCharacter {
             [char]0x200B = @{ Description = 'zero width space'; Severity = 'Error' }
             [char]0x200C = @{ Description = 'zero width non-joiner'; Severity = 'Warning' }
             [char]0x200E = @{ Description = 'left-to-right mark'; Severity = 'Error' }
+            [char]0x2011 = @{ Description = 'non-breaking hyphen'; Severity = 'Warning' }
+            [char]0x2012 = @{ Description = 'figure dash'; Severity = 'Warning' }
             [char]0x2013 = @{ Description = 'en dash'; Severity = 'Warning' }
+            [char]0x2014 = @{ Description = 'em dash'; Severity = 'Warning' }
             [char]0x2018 = @{ Description = 'left single quotation mark'; Severity = 'Warning' }
             [char]0x2019 = @{ Description = 'right single quotation mark'; Severity = 'Warning' }
             [char]0x201C = @{ Description = 'left double quotation mark'; Severity = 'Warning' }
