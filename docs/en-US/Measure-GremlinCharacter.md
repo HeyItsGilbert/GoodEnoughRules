@@ -26,7 +26,7 @@ Severity levels reflect how dangerous the character is:
 
 - **Error** - Bidirectional overrides, zero-width spaces, and control characters
   that can actively obscure code intent or enable Trojan-source attacks.
-- **Warning** - Typographic characters (curly quotes, en dash) that are unlikely
+- **Warning** - Typographic characters (curly quotes, non-breaking hyphen, figure dash, en dash, em dash) that are unlikely
   to be intentional in source code and may cause parse errors.
 - **Information** - Characters like non-breaking spaces that are rarely intentional
   but generally harmless.

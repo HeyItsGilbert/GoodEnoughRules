@@ -23,7 +23,10 @@ Describe 'Measure-GremlinCharacter' {
         @{ Char = [char]0x200B; CodePoint = '200B'; Description = 'zero width space'; Severity = 'Error' }
         @{ Char = [char]0x200C; CodePoint = '200C'; Description = 'zero width non-joiner'; Severity = 'Warning' }
         @{ Char = [char]0x200E; CodePoint = '200E'; Description = 'left-to-right mark'; Severity = 'Error' }
+        @{ Char = [char]0x2011; CodePoint = '2011'; Description = 'non-breaking hyphen'; Severity = 'Warning' }
+        @{ Char = [char]0x2012; CodePoint = '2012'; Description = 'figure dash'; Severity = 'Warning' }
         @{ Char = [char]0x2013; CodePoint = '2013'; Description = 'en dash'; Severity = 'Warning' }
+        @{ Char = [char]0x2014; CodePoint = '2014'; Description = 'em dash'; Severity = 'Warning' }
         @{ Char = [char]0x2018; CodePoint = '2018'; Description = 'left single quotation mark'; Severity = 'Warning' }
         @{ Char = [char]0x2019; CodePoint = '2019'; Description = 'right single quotation mark'; Severity = 'Warning' }
         @{ Char = [char]0x201C; CodePoint = '201C'; Description = 'left double quotation mark'; Severity = 'Warning' }
