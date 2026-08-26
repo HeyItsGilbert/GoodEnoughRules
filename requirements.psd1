@@ -1,13 +1,13 @@
 # spell-checker:ignore psake
 @{
     PSDepend = @{
-        Version = '0.3.8'
+        Version = '0.5.0'
     }
     PSDependOptions = @{
         Target = 'CurrentUser'
     }
     'Pester' = @{
-        Version = '5.7.1'
+        Version = '6.1.0'
         Parameters = @{
             SkipPublisherCheck = $true
         }
